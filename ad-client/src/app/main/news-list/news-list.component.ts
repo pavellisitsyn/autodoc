@@ -22,6 +22,7 @@ export class NewsListComponent implements OnInit, OnDestroy {
   mode = 'indeterminate';
   newsListSub: Subscription
   pageNumber: number = 1;
+  itemsPerPage: number = 10;
 
 
   constructor(
@@ -34,23 +35,67 @@ export class NewsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.newsListSub = this.newsApi.getAllNews(this.pageNumber).subscribe(
-      data => {
-        this.news = data;
-        if (localStorage.getItem('userNews')) {
-          const userNews = JSON.parse(localStorage.getItem('userNews'))
-          userNews.forEach(element => {
-            return this.news = [element, ...this.news]
-          });
-        } else {
-          return this.news
-        }
-      },
-      error => {
-        console.log(error)
-      },
-    )
+    this.getNews(this.pageNumber)
+
+    if (localStorage.getItem('userNews')) {
+      const userNews = JSON.parse(localStorage.getItem('userNews'))
+      userNews.forEach(element => {
+        this.news = [element, ...this.news]
+      });
+    }
+
+    // this.newsListSub = this.newsApi.getAllNews(this.pageNumber).subscribe(
+    //   data => {
+    //     this.news = data;
+    //     if (localStorage.getItem('userNews')) {
+    //       const userNews = JSON.parse(localStorage.getItem('userNews'))
+    //       userNews.forEach(element => {
+    //         return this.news = [element, ...this.news]
+    //       });
+    //     } else {
+    //       return this.news
+    //     }
+    //   },
+    //   error => {
+    //     console.log(error)
+    //   },
+    // )
+
+    this.scrollService.getObservable().subscribe(status => {
+      if (status) {
+        this.pageNumber = this.pageNumber + 1;
+        this.getNews(this.pageNumber);
+      }
+    })
   }
+
+  getNews(pageNumber: number) {
+    this.newsListSub = this.newsApi.getAllNews(pageNumber).subscribe(response => {
+      this.news = this.news.concat(response);
+      let clear = setInterval(() => {
+        let target = document.querySelector(`#target${pageNumber * this.itemsPerPage}`);
+        if (target) {
+          console.log("last element found")
+          clearInterval(clear);
+          this.scrollService.setObserver().observe(target);
+        }
+      }, 500)
+    },
+      err => {
+        console.log(err);
+      })
+  }
+
+  // @HostListener("window:scroll", [])
+  // onScroll(): void {
+  //   if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+  //     this.pageNumber = this.pageNumber + 1
+  //     this.newsListSub = this.newsApi.getAllNews(this.pageNumber).subscribe(
+  //       newPortion => {
+  //         this.news = this.news.concat(newPortion);
+  //       })
+  //   }
+  // }
 
   addNews() {
     const dialogConfig = new MatDialogConfig();
