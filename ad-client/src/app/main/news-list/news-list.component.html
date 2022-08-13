@@ -1,1 +1,29 @@
-<p>news-list works!</p>
+<h1>Новости Автодок</h1>
+<button mat-stroked-button (click)="addNews()">Добавить новость</button>
+<mat-divider style="margin-top: 10px; margin-bottom: 10px"></mat-divider>
+
+<div *ngIf="posts$ | async; else loading" class="news-wrapper">
+  <div class="row" style="display: inline; justify-content: center">
+    <app-news-post
+      *ngFor="let post of news; let idx = index"
+      [post]="post"
+      [idx]="idx"
+    ></app-news-post>
+  </div>
+  <button mat-raised-button class="topbtn" topbtn (click)="topFunction()">
+    Наверх
+    <fa-icon [icon]="faLevelUpAlt"></fa-icon>
+  </button>
+</div>
+
+<ng-template #loading>
+  <div class="row loading text-center">
+    <mat-card>
+      <mat-card-header>
+        <mat-progress-spinner [color]="color" [mode]="mode" style="margin: 5px">
+        </mat-progress-spinner>
+        <h2>Идёт загрузка постов...</h2>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</ng-template>

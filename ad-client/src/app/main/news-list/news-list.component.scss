@@ -1,0 +1,53 @@
+@use "src/app/shared/utils/color-variables.scss";
+
+// .news-wrapper {
+//   display: flex;
+//   justify-content: center;
+// }
+
+.example-viewport {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.example-item {
+  height: 50px;
+}
+
+.topbtn {
+  position: fixed;
+  bottom: 50px;
+  left: 70px;
+  z-index: 99;
+  outline: none;
+  background-color: color-variables.$color-base-link;
+  color: color-variables.$color-alt-white;
+  font-size: 12px;
+  font-weight: 400;
+
+  &:hover {
+    background-color: color-variables.$color-hovered-link;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    mat-card-header {
+      display: flex;
+      justify-content: center;
+    }
+    mat-card-footer {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: color-variables.$color-base-black;
+      color: color-variables.$color-alt-white;
+      padding: 10px;
+      border-radius: 0px 0px 2px 2px;
+    }
+  }
+}
