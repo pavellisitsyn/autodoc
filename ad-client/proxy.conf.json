@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://webapi.autodoc.ru",
+    "secure": false
+  }
+}

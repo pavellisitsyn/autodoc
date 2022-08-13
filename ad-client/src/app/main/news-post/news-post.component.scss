@@ -1,0 +1,30 @@
+@use "src/app/shared/utils/color-variables.scss";
+
+.tile-card {
+  margin: 10px;
+  display: block;
+  max-width: 30rem;
+
+  .title-link {
+    text-decoration: none;
+    color: color-variables.$color-base-link;
+
+    &:hover {
+      color: color-variables.$color-hovered-link;
+    }
+
+    // img {
+    //   height: 270px;
+    // }
+  }
+
+  .category {
+    font-size: 14px;
+    color: grey;
+    font-weight: 400;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

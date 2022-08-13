@@ -1,0 +1,36 @@
+<mat-card class="tile-card" id="target{{ idx + 1 }}">
+  <mat-card-header>
+    <mat-card-title>
+      <a
+        class="title-link"
+        [routerLink]="post.imageFile ? '' : ['/news', 'item', post.url]"
+        >{{ post.title }}</a
+      >
+    </mat-card-title>
+    <mat-card-subtitle>
+      <span class="category" matTooltip="Категория" matTooltipPosition="right"
+        ># {{ post.categoryType }} </span
+      ><br />
+      <small
+        >Опубликовано:
+        {{ post.publishedDate | date: "dd MMMM yyyy года в HH:mm" }}</small
+      >
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img
+    *ngIf="post.titleImageUrl && !post.imageFile; else userInputPhoto"
+    mat-card-image
+    src="{{ post.titleImageUrl }}"
+  />
+  <ng-template #userInputPhoto>
+    <img mat-card-image [src]="image" />
+  </ng-template>
+  <mat-card-content>
+    {{ post.description }}
+  </mat-card-content>
+  <mat-card-actions>
+    <a href="{{ post.fullUrl }}" mat-stroked-button target="_blank"
+      >Смотреть в источнике</a
+    >
+  </mat-card-actions>
+</mat-card>

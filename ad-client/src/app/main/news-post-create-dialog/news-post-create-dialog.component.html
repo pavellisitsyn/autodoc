@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Добавление новости</h1>
+<div mat-dialog-content class="create-form">
+  <form [formGroup]="createNewsPostForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Заголовок новости:</mat-label>
+      <input matInput formControlName="title" placeholder="Введите заголовок" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Текст новости:</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Введите текст новости:"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Url-адрес новости:</mat-label>
+      <input
+        matInput
+        formControlName="url"
+        placeholder="Укажите url-адрес новости:"
+      />
+    </mat-form-field>
+    <input type="file" (change)="onFileSelected($event)" class="file-input" />
+    <mat-form-field appearance="outline">
+      <mat-label>Категория новости:</mat-label>
+      <input
+        matInput
+        formControlName="categoryType"
+        placeholder="Введите заголовок"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button (click)="submit()">
+    <i class="material-icons md-12">save</i> Сохранить
+  </button>
+</div>
