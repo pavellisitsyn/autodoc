@@ -17,6 +17,7 @@ export class NewsApiService {
 
   constructor(private http: HttpClient) { }
 
+  // Get news according params
   getAllNews(pageNumber: number, newsPerPage: number): Observable<NewsPost[]> {
     return this.http.get(`${this.baseUrl}/api/news/${pageNumber}/${newsPerPage}`, { headers: this.httpHeaders })
       .pipe(map((response: { [news: string]: any }) => {
@@ -29,6 +30,7 @@ export class NewsApiService {
       }))
   }
 
+  // Get post by url
   getByNewsUrl(url: string): Observable<NewsPost> {
     return this.http.get<NewsPost>(`${this.baseUrl}/api/news/item/${url}`, { headers: this.httpHeaders })
       .pipe(map((post: NewsPost) => {

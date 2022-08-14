@@ -24,9 +24,11 @@ export class NewsPostCreateDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Check if we erlier saved to localStorage some news; if yes, add them to existing array
     if (localStorage.getItem('userNews')) {
       this.userNews = JSON.parse(localStorage.userNews)
     }
+    // New news post form
     this.createNewsPostForm = this._formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -39,6 +41,7 @@ export class NewsPostCreateDialogComponent implements OnInit {
   }
 
   onFileSelected(event) {
+    // Get file and convert it to base64
     if (<File>event.target.files[0]) {
       this.selectedPhoto = <File>event.target.files[0];
       this.convertFile(this.selectedPhoto).subscribe(base64 => {
@@ -48,6 +51,7 @@ export class NewsPostCreateDialogComponent implements OnInit {
   }
 
   convertFile(file: File): Observable<string> {
+    // Convert to base64 function
     if (file) {
       const result = new ReplaySubject<string>(1);
       const reader = new FileReader();
@@ -58,6 +62,7 @@ export class NewsPostCreateDialogComponent implements OnInit {
   }
 
   submit() {
+    // Save form
     const newsPost: NewsPostCreateForm = {
       title: this.createNewsPostForm.value.title,
       description: this.createNewsPostForm.value.description,
@@ -68,8 +73,10 @@ export class NewsPostCreateDialogComponent implements OnInit {
       categoryType: this.createNewsPostForm.value.categoryType,
       imageFile: this.base64Output,
     }
+    // Push new created post to array and save updated array to localStorage (as string)
     this.userNews.push(newsPost)
     localStorage.setItem('userNews', JSON.stringify(this.userNews))
+    // Reset form and close the dialog
     this.createNewsPostForm.reset()
     this.dialogRef.close({ data: this.userNews })
   }

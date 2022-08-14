@@ -18,6 +18,7 @@ export class NewsPostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Sanitize image url
     if (this.post.imageFile) {
       this.image = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpeg;base64, ${this.post.imageFile}`)
     }

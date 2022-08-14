@@ -24,6 +24,7 @@ export class NewsDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    // Get current post by parsing route params
     this.postSub = this.route.params.pipe(
       switchMap((params: Params) => {
         return this.newsApi.getByNewsUrl(params['url'])

@@ -24,15 +24,11 @@ export class ScrollingHandlerService {
 
   intersectionCallback(entries, observer) {
     entries.forEach(entry => {
-      console.log(entry.intersectionRatio);
       entry.intersectionRatio === 1 ? this.intersectionSubject.next(true) : this.intersectionSubject.next(false);
     })
   }
 
   setObserver() {
-    console.log(this)
     return this.observer;
   }
-
-
 }

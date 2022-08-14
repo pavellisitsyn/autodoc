@@ -14,6 +14,7 @@ export class TopbtnDirective {
     const scrollForSafary = document.body.scrollTop
     const scrollForOthers = document.documentElement.scrollTop
 
+    // Show or hide the button
     if (scrollForOthers > 200 || scrollForSafary > 500) {
       this.r.setStyle(this.el.nativeElement, 'display', 'block')
     } else {
