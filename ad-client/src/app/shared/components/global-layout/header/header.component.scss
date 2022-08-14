@@ -144,11 +144,16 @@
         height: 100%;
 
         .menu {
+          margin-top: 1px;
           background-color: color-variables.$color-base-blue;
           color: color-variables.$color-base-white;
 
           &:hover {
             color: color-variables.$color-base-red;
+          }
+
+          mat-icon {
+            margin-top: -3px;
           }
         }
 
