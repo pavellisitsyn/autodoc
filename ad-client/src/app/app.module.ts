@@ -14,9 +14,7 @@ import { SharedModule } from './shared/modules/shared.module';
 import { NewsPostCreateDialogComponent } from './main/news-post-create-dialog/news-post-create-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentComponent } from './shared/components/global-layout/content/content.component';
-import { HeaderComponent } from './shared/components/global-layout/header/header.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { TopbtnDirective } from './main/news-list/topbtn.directive';
 
 
 registerLocaleData(ruLocale, 'ru')
@@ -28,9 +26,7 @@ registerLocaleData(ruLocale, 'ru')
     NewsDetailComponent,
     NewsPostComponent,
     NewsPostCreateDialogComponent,
-    HeaderComponent,
     ContentComponent,
-    TopbtnDirective,
   ],
   imports: [
     BrowserModule,

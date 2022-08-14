@@ -1,0 +1,101 @@
+@use "src/app/shared/utils/color-variables.scss";
+
+.post-wrapper {
+  max-width: 1490px;
+  padding: 10px;
+
+  .back-btn {
+    margin: 10px 0px 20px 0px;
+  }
+
+  .back-btn,
+  .see-source {
+    height: 40px;
+    border-radius: 2px;
+    outline: none;
+    background-color: color-variables.$color-base-blue;
+    color: color-variables.$color-base-white;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 300;
+
+    &:hover {
+      background-color: color-variables.$color-base-link;
+      transition: 0.3s ease;
+    }
+  }
+  .tile-card {
+    min-height: 43vw !important;
+
+    img {
+      max-width: 45vw !important;
+      float: left;
+    }
+
+    mat-card-title {
+      color: color-variables.$color-base-link;
+    }
+
+    .mat-card-content {
+      font-size: 18px;
+    }
+
+    .mat-card-content,
+    .mat-card-actions {
+      position: relative;
+      left: 30px;
+    }
+  }
+}
+
+.loading {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    display: flex;
+    align-items: center;
+
+    .loader-title {
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
+}
+
+@media (max-width: 925px) {
+  ::ng-deep .mat-card-header-text {
+    margin: 0px !important;
+
+    .mat-card-title {
+      font-size: 18px !important;
+    }
+  }
+
+  .post-wrapper .tile-card {
+    min-height: 25vh;
+    padding-bottom: 30px !important;
+
+    img {
+      max-width: fit-content !important;
+      float: none !important;
+    }
+
+    .mat-card-content {
+      font-size: 14px;
+      position: relative;
+      left: -12px;
+    }
+    .mat-card-actions {
+      position: relative;
+      left: 10px;
+    }
+  }
+  ::mat-card-header {
+    .mat-card-header-text {
+      margin: 0px !important;
+    }
+  }
+}

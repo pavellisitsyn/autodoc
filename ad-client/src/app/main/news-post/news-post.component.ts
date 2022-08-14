@@ -21,7 +21,6 @@ export class NewsPostComponent implements OnInit {
     if (this.post.imageFile) {
       this.image = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpeg;base64, ${this.post.imageFile}`)
     }
-    // this.url = this.post.url.replace(/%2F/, '/')
   }
 
 }

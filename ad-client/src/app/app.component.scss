@@ -1,8 +1,12 @@
+@use "src/app/shared/utils/color-variables.scss";
+
 .global-wrapper {
   display: flex;
   flex-direction: column;
   padding: 0px;
   margin: 0px;
+  background-color: color-variables.$color-alt-white;
+  min-height: 100vh;
 
   app-header {
     position: sticky;

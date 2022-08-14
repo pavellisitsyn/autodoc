@@ -15,6 +15,9 @@ export class NewsDetailComponent implements OnInit, OnDestroy {
   postSub: Subscription
   post: NewsPost | NewsPostCreateForm;
 
+  color = 'accent';
+  mode = 'indeterminate';
+
   constructor(
     private route: ActivatedRoute,
     private newsApi: NewsApiService,

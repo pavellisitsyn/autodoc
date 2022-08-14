@@ -35,6 +35,10 @@ $ad-client-theme: mat-light-theme(
 @include angular-material-theme($ad-client-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: lato;
+  src: url("/assets/fonts/pfdindisplaypro-medium.woff2") format("truetype");
+}
 
 html,
 body {
@@ -42,5 +46,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: PFDinDisplayPro, Arial, sans-serif !important;
 }

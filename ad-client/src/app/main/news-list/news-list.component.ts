@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { faLevelUpAlt } from '@fortawesome/free-solid-svg-icons';
+import { faLevelUpAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { NewsPost, NewsPostCreateForm } from 'src/app/shared/interfaces/news.interface';
 import { NewsApiService } from 'src/app/shared/services/news-api.service';
@@ -15,14 +15,16 @@ import { NewsPostCreateDialogComponent } from '../news-post-create-dialog/news-p
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsListComponent implements OnInit, OnDestroy {
+  title: string = 'Новости'
   faLevelUpAlt = faLevelUpAlt
+  faPlus = faPlus
   posts$: Observable<NewsPost[]>
   news: NewsPost[] | (NewsPost[] & NewsPostCreateForm[]) = [];
   color = 'accent';
   mode = 'indeterminate';
   newsListSub: Subscription
   pageNumber: number = 1;
-  itemsPerPage: number = 10;
+  newsPerPage: number = 10;
 
 
   constructor(
@@ -31,71 +33,41 @@ export class NewsListComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private scrollService: ScrollingHandlerService,
   ) {
-    this.posts$ = this.newsApi.getAllNews(this.pageNumber);
+    this.posts$ = this.newsApi.getAllNews(this.pageNumber, this.newsPerPage);
+    this.getNews(this.pageNumber, this.newsPerPage)
   }
 
   ngOnInit(): void {
-    this.getNews(this.pageNumber)
-
     if (localStorage.getItem('userNews')) {
       const userNews = JSON.parse(localStorage.getItem('userNews'))
       userNews.forEach(element => {
         this.news = [element, ...this.news]
       });
     }
-
-    // this.newsListSub = this.newsApi.getAllNews(this.pageNumber).subscribe(
-    //   data => {
-    //     this.news = data;
-    //     if (localStorage.getItem('userNews')) {
-    //       const userNews = JSON.parse(localStorage.getItem('userNews'))
-    //       userNews.forEach(element => {
-    //         return this.news = [element, ...this.news]
-    //       });
-    //     } else {
-    //       return this.news
-    //     }
-    //   },
-    //   error => {
-    //     console.log(error)
-    //   },
-    // )
-
     this.scrollService.getObservable().subscribe(status => {
       if (status) {
         this.pageNumber = this.pageNumber + 1;
-        this.getNews(this.pageNumber);
+        this.getNews(this.pageNumber, this.newsPerPage);
       }
     })
   }
 
-  getNews(pageNumber: number) {
-    this.newsListSub = this.newsApi.getAllNews(pageNumber).subscribe(response => {
+  getNews(pageNumber: number, newsPerPage: number) {
+    this.newsListSub = this.newsApi.getAllNews(pageNumber, newsPerPage).subscribe(response => {
       this.news = this.news.concat(response);
       let clear = setInterval(() => {
-        let target = document.querySelector(`#target${pageNumber * this.itemsPerPage}`);
+        let target = document.querySelector(`#target${pageNumber * this.newsPerPage}`);
         if (target) {
           console.log("last element found")
           clearInterval(clear);
           this.scrollService.setObserver().observe(target);
         }
-      }, 500)
+      }, 1000)
     },
       err => {
         console.log(err);
       })
   }
-
-  // @HostListener("window:scroll", [])
-  // onScroll(): void {
-  //   if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-  //     this.pageNumber = this.pageNumber + 1
-  //     this.newsListSub = this.newsApi.getAllNews(this.pageNumber).subscribe(
-  //       newPortion => {
-  //         this.news = this.news.concat(newPortion);
-  //       })
-  //   }
-  // }
 
   addNews() {
     const dialogConfig = new MatDialogConfig();

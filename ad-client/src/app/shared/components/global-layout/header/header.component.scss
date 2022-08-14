@@ -1,25 +1,36 @@
 @use "src/app/shared/utils/color-variables.scss";
 
+::placeholder {
+  color: color-variables.$color-header-base-link;
+}
+
 .header {
   display: block;
   align-items: center;
   background-color: color-variables.$color-alt-white;
-  height: 90px;
+  height: 145px;
   font-weight: 600;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
   font-size: 15px;
   font-weight: 400;
+  padding: 0px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 
-  .bar {
+  .main-bar {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    max-width: 1490px;
+
+    .alt-menu {
+      display: none;
+    }
 
     .logo {
       display: flex;
+      flex: 3 0 0;
       flex-direction: row;
+      justify-content: space-between;
 
       .logo-atd img {
         height: 66px;
@@ -27,11 +38,10 @@
       }
       .logo-adr {
         display: flex;
-        flex-direction: column;
+        width: 50%;
+        flex-direction: row;
         justify-content: center;
-        // width: 100%;
-        // height: 66px;
-        // text-align: center;
+        align-items: center;
 
         img {
           display: inline-block;
@@ -41,8 +51,56 @@
       }
     }
 
+    .search {
+      display: flex;
+      flex: 4 0 0;
+      flex-direction: row;
+      justify-content: center;
+
+      input {
+        margin: 10px 0px 10px 10px;
+        width: 100%;
+        border: none;
+        padding: 0px 15px;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:focus::placeholder {
+          color: transparent;
+        }
+      }
+      button {
+        width: 120px;
+        color: color-variables.$color-base-white;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 10px 0px;
+        border-radius: 0px;
+        background-color: color-variables.$color-base-red;
+        border-right: none;
+      }
+
+      .triangle {
+        margin: 10px 10px 10px 0px;
+        width: 20px;
+        height: 46px;
+        background-color: transparent;
+        &:after {
+          content: " ";
+          border-top: 23px solid transparent;
+          border-left: 15px solid color-variables.$color-base-red;
+          border-bottom: 23px solid transparent;
+          width: 0;
+          position: absolute;
+        }
+      }
+    }
+
     .contacts {
       display: flex;
+      flex: 3 0 0;
       flex-direction: column;
       justify-content: center;
 
@@ -50,10 +108,6 @@
         display: flex;
         justify-content: flex-end;
         color: color-variables.$color-header-base-link;
-
-        // span {
-        //   text-decoration: underline;
-        // }
 
         &:hover {
           color: color-variables.$color-header-hovered-link;
@@ -70,5 +124,82 @@
         text-decoration: none;
       }
     }
+  }
+
+  .subheader {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 0px;
+    max-width: 1490px;
+
+    .nav-list {
+      display: flex;
+      list-style-type: none;
+      padding: 0px;
+
+      li {
+        margin-right: 10px;
+        height: 100%;
+
+        .menu {
+          background-color: color-variables.$color-base-blue;
+          color: color-variables.$color-base-white;
+
+          &:hover {
+            color: color-variables.$color-base-red;
+          }
+        }
+
+        a,
+        button {
+          border-radius: 2px;
+          font-size: 16px;
+          font-weight: 300;
+        }
+
+        &:hover a {
+          text-decoration: none;
+          color: color-variables.$color-base-red;
+          transition: 0.3s ease;
+        }
+      }
+    }
+    .account {
+      border-radius: 2px;
+    }
+  }
+}
+
+@media (max-width: 925px) {
+  .header {
+    height: 65px !important;
+  }
+  .header .main-bar {
+    padding: 0;
+    .logo,
+    .contacts {
+      display: none !important;
+    }
+    .alt-menu {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+
+      button {
+        border-radius: 2px;
+        background-color: color-variables.$color-base-blue;
+        color: color-variables.$color-base-white;
+
+        &:hover {
+          color: color-variables.$color-base-red;
+        }
+      }
+    }
+  }
+
+  .subheader {
+    display: none !important;
   }
 }

@@ -39,18 +39,22 @@ export class NewsPostCreateDialogComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    this.selectedPhoto = <File>event.target.files[0];
-    this.convertFile(this.selectedPhoto).subscribe(base64 => {
-      this.base64Output = base64;
-    });
+    if (<File>event.target.files[0]) {
+      this.selectedPhoto = <File>event.target.files[0];
+      this.convertFile(this.selectedPhoto).subscribe(base64 => {
+        this.base64Output = base64;
+      });
+    }
   }
 
   convertFile(file: File): Observable<string> {
-    const result = new ReplaySubject<string>(1);
-    const reader = new FileReader();
-    reader.readAsBinaryString(file);
-    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
-    return result;
+    if (file) {
+      const result = new ReplaySubject<string>(1);
+      const reader = new FileReader();
+      reader.readAsBinaryString(file);
+      reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+      return result;
+    }
   }
 
   submit() {

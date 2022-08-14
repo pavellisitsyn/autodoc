@@ -9,8 +9,6 @@ import { NewsPost } from 'src/app/shared/interfaces/news.interface';
 })
 export class NewsApiService {
   baseUrl = "https://webapi.autodoc.ru";
-  pageNumber = 1;
-  newsPerPage = 10;
 
   httpHeaders = new HttpHeaders({
     "Access-Control-Allow-Origin": "*",
@@ -19,8 +17,8 @@ export class NewsApiService {
 
   constructor(private http: HttpClient) { }
 
-  getAllNews(pageNumber: number): Observable<NewsPost[]> {
-    return this.http.get(`${this.baseUrl}/api/news/${pageNumber}/${this.newsPerPage}`, { headers: this.httpHeaders })
+  getAllNews(pageNumber: number, newsPerPage: number): Observable<NewsPost[]> {
+    return this.http.get(`${this.baseUrl}/api/news/${pageNumber}/${newsPerPage}`, { headers: this.httpHeaders })
       .pipe(map((response: { [news: string]: any }) => {
         return Object
           .keys(response.news)

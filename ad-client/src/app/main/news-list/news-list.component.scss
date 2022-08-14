@@ -1,33 +1,83 @@
 @use "src/app/shared/utils/color-variables.scss";
 
-// .news-wrapper {
-//   display: flex;
-//   justify-content: center;
-// }
-
-.example-viewport {
-  height: 200px;
-  width: 200px;
-  border: 1px solid black;
+.news-list-header-wrapper,
+.news-post-wrapper {
+  max-width: 1490px;
+  margin: 0px;
+  display: block;
 }
 
-.example-item {
-  height: 50px;
+.news-list-header-wrapper {
+  padding: 10px;
+
+  .breadcrumbs {
+    display: flex;
+    list-style-type: none;
+    padding-left: 0px;
+    margin: 5px 0px;
+
+    li {
+      font-size: 14px;
+      margin-right: 5px;
+      color: color-variables.$color-base-grey;
+
+      a {
+        color: color-variables.$color-base-grey;
+
+        &:hover {
+          cursor: pointer;
+          color: color-variables.$color-base-blue;
+        }
+      }
+    }
+  }
+
+  .tools {
+  }
+
+  .title {
+    font-size: 22px;
+    margin: 10px 0px;
+  }
+
+  .divider {
+    margin: 10px 0px 20px 0px;
+  }
+}
+
+.news-post-wrapper {
+  padding: 0px;
 }
 
 .topbtn {
-  position: fixed;
-  bottom: 50px;
-  left: 70px;
   z-index: 99;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.addbtn {
+  width: 195px;
+  margin: 10px 0px;
+
+  fa-icon {
+    font-size: 18px;
+  }
+}
+
+.topbtn,
+.addbtn {
+  height: 40px;
+  border-radius: 2px;
   outline: none;
-  background-color: color-variables.$color-base-link;
-  color: color-variables.$color-alt-white;
-  font-size: 12px;
+  background-color: color-variables.$color-base-blue;
+  color: color-variables.$color-base-white;
+  font-size: 14px;
   font-weight: 400;
 
   &:hover {
-    background-color: color-variables.$color-hovered-link;
+    background-color: color-variables.$color-base-link;
+    transition: 0.3s ease;
   }
 }
 
@@ -36,18 +86,19 @@
   justify-content: center;
 
   mat-card {
-    mat-card-header {
-      display: flex;
-      justify-content: center;
+    display: flex;
+    align-items: center;
+
+    .loader-title {
+      font-size: 24px;
+      font-weight: 400;
     }
-    mat-card-footer {
-      display: flex;
-      justify-content: center;
-      padding: 10px;
-      background-color: color-variables.$color-base-black;
-      color: color-variables.$color-alt-white;
-      padding: 10px;
-      border-radius: 0px 0px 2px 2px;
-    }
+  }
+}
+
+@media (max-width: 925px) {
+  .topbtn {
+    bottom: 10px;
+    left: 10px;
   }
 }

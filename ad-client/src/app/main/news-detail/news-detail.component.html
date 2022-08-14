@@ -1,5 +1,5 @@
-<div *ngIf="post; else loading" [post]="post">
-  <button mat-stroked-button routerLink="/news" class="my-3">
+<div *ngIf="post; else loading" [post]="post" class="post-wrapper">
+  <button mat-stroked-button [routerLink]="['/news']" class="back-btn">
     <i class="mb-1 material-icons md-18">arrow_back</i> Вернуться к списку
     новостей
   </button>
@@ -10,8 +10,11 @@
         {{ post.title }}
       </mat-card-title>
       <mat-card-subtitle>
-        <span class="category" matTooltip="Категория" matTooltipPosition="right"
-          ># {{ post.categoryType }} </span
+        <small
+          class="category"
+          matTooltip="Категория"
+          matTooltipPosition="right"
+          >Категории: {{ post.categoryType }} </small
         ><br />
         <small
           >Опубликовано:
@@ -28,10 +31,16 @@
       <img mat-card-image [src]="image" />
     </ng-template>
     <mat-card-content>
-      {{ post.description }}
+      <div class="container-fluid content">
+        {{ post.description }}
+      </div>
     </mat-card-content>
     <mat-card-actions>
-      <a href="{{ post.fullUrl }}" mat-stroked-button target="_blank"
+      <a
+        href="{{ post.fullUrl }}"
+        mat-stroked-button
+        target="_blank"
+        class="see-source"
         >Смотреть в источнике</a
       >
     </mat-card-actions>
@@ -39,21 +48,16 @@
 </div>
 
 <ng-template #loading>
-  <div class="row loading text-center">
+  <div class="loading text-center">
     <mat-card>
-      <mat-card-header>
-        <mat-progress-spinner [color]="color" [mode]="mode" style="margin: 5px">
-        </mat-progress-spinner>
-        <h2>Идёт загрузка поста...</h2>
-      </mat-card-header>
-      <mat-divider [inset]="false"></mat-divider>
-      <mat-card-footer>
-        <small>
-          P.S. если загрузка длится более 10 сек - вероятно срок действия Вашего
-          токена истёк.<br />
-          Пройдите повторно процедуру авторизации.
-        </small>
-      </mat-card-footer>
+      <mat-progress-spinner
+        [color]="color"
+        [diameter]="40"
+        [mode]="mode"
+        style="margin: 5px"
+      >
+      </mat-progress-spinner>
+      <div class="loader-title">Идёт загрузка постов...</div>
     </mat-card>
   </div>
 </ng-template>

@@ -1,30 +1,119 @@
 @use "src/app/shared/utils/color-variables.scss";
 
 .tile-card {
-  margin: 10px;
-  display: block;
-  max-width: 30rem;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  max-width: 1490px;
+  height: 200px;
+  padding: 20px;
+  justify-content: flex-start;
+  vertical-align: middle;
+  background-color: #f3f3f3;
 
-  .title-link {
-    text-decoration: none;
-    color: color-variables.$color-base-link;
-
-    &:hover {
-      color: color-variables.$color-hovered-link;
-    }
-
-    // img {
-    //   height: 270px;
-    // }
+  &:hover {
+    transition: 0.7s ease;
+    background-color: white;
+    cursor: pointer;
   }
 
-  .category {
-    font-size: 14px;
-    color: grey;
-    font-weight: 400;
+  .image {
+    height: 160px;
+    width: 200px;
+    overflow-x: hidden;
+    border-radius: 3px;
 
-    &:hover {
-      cursor: pointer;
+    img {
+      max-height: 160px;
+      width: auto;
+    }
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: -7px;
+    padding-right: 15px;
+
+    .divider {
+      margin: 0px !important;
+      padding: 0px !important;
+      display: flex;
+    }
+
+    .content {
+      ::ng-deep .mat-card-header-text {
+        margin: 0px !important;
+      }
+
+      display: flex;
+      flex-direction: row;
+      margin: 0px 20px;
+
+      .title-link {
+        text-decoration: none;
+        color: color-variables.$color-base-link;
+
+        &:hover {
+          color: color-variables.$color-base-red;
+        }
+      }
+
+      .see-source {
+        height: 40px;
+        border-radius: 2px;
+        outline: none;
+        background-color: color-variables.$color-base-blue;
+        color: color-variables.$color-alt-white;
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 400;
+
+        &:hover {
+          background-color: color-variables.$color-base-link;
+          color: color-variables.$color-base-white;
+          transition: 0.3s ease;
+        }
+      }
+    }
+
+    .description {
+      margin-top: 4px;
+    }
+  }
+}
+
+@media (max-width: 925px) {
+  .tile-card .content-wrapper {
+    margin-top: 0px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    mat-card-subtitle,
+    mat-card-content {
+      font-size: 12px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      max-height: min-content;
+      font-size: 12px;
+
+      .mat-card-title-wrapper {
+        font-size: 14px;
+      }
+
+      .see-source {
+        font-size: 12px !important;
+      }
     }
   }
 }

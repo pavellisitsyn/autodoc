@@ -1,29 +1,44 @@
-<h1>Новости Автодок</h1>
-<button mat-stroked-button (click)="addNews()">Добавить новость</button>
-<mat-divider style="margin-top: 10px; margin-bottom: 10px"></mat-divider>
-
-<div *ngIf="posts$ | async; else loading" class="news-wrapper">
-  <div class="row" style="display: inline; justify-content: center">
+<div class="row news-list-header-wrapper">
+  <h2 class="title">{{ title }} Автодок</h2>
+  <ul class="breadcrumbs">
+    <li>
+      <a routerLink="/">Компания</a>
+    </li>
+    <li>/</li>
+    <li>
+      <a routerLink="['/news']">{{ title }}</a>
+    </li>
+  </ul>
+  <button mat-raised-button (click)="addNews()" class="addbtn">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    Добавить новость
+  </button>
+  <mat-divider class="divider"></mat-divider>
+  <div *ngIf="posts$ | async; else loading">
     <app-news-post
+      class="row news-post-wrapper"
       *ngFor="let post of news; let idx = index"
       [post]="post"
       [idx]="idx"
     ></app-news-post>
+    <button mat-raised-button class="topbtn" topbtn (click)="topFunction()">
+      Наверх
+      <fa-icon [icon]="faLevelUpAlt"></fa-icon>
+    </button>
   </div>
-  <button mat-raised-button class="topbtn" topbtn (click)="topFunction()">
-    Наверх
-    <fa-icon [icon]="faLevelUpAlt"></fa-icon>
-  </button>
-</div>
 
-<ng-template #loading>
-  <div class="row loading text-center">
-    <mat-card>
-      <mat-card-header>
-        <mat-progress-spinner [color]="color" [mode]="mode" style="margin: 5px">
+  <ng-template #loading>
+    <div class="loading text-center">
+      <mat-card>
+        <mat-progress-spinner
+          [color]="color"
+          [diameter]="40"
+          [mode]="mode"
+          style="margin: 5px"
+        >
         </mat-progress-spinner>
-        <h2>Идёт загрузка постов...</h2>
-      </mat-card-header>
-    </mat-card>
-  </div>
-</ng-template>
+        <div class="loader-title">Идёт загрузка постов...</div>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>

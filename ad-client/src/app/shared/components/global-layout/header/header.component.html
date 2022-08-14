@@ -1,12 +1,24 @@
-<div class="container-fluid header" role="banner">
-  <div class="bar">
+<div class="header" role="banner">
+  <div class="container main-bar">
     <div class="logo">
       <a href="https://www.autodoc.ru" target="_blank" class="logo-atd"
         ><img src="assets/images/atd-logo.svg"
       /></a>
-      <a href="http://www.adrussia.ru/" target="_blank" class="logo-adr"
-        ><img src="assets/images/ad-russia.svg"
-      /></a>
+      <div class="logo-adr">
+        <a href="http://www.adrussia.ru/" target="_blank"
+          ><img src="assets/images/ad-russia.svg"
+        /></a>
+      </div>
+    </div>
+    <div class="alt-menu">
+      <button mat-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Поиск по артикулу или VIN коду" />
+      <button mat-stroked-button type="submit" click="search()">Поиск</button>
+      <div class="triangle"></div>
     </div>
     <div class="contacts">
       <a href="#">
@@ -15,5 +27,29 @@
       >
       <a href="tel:+78007779980" id="tel">+7 (800) 777-99-80</a>
     </div>
+  </div>
+  <div class="container subheader">
+    <ul class="nav-list">
+      <li>
+        <button
+          class="menu"
+          mat-icon-button
+          (click)="toggleMenu()"
+          matTooltip="Меню"
+          matTooltipPosition="left"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </li>
+      <li>
+        <a mat-button routerLink="/">
+          <fa-icon [icon]="faHome"> Домашняя</fa-icon>
+        </a>
+      </li>
+      <li *ngFor="let link of links">
+        <a mat-button href="{{ link.url }}" target="_blank">{{ link.title }}</a>
+      </li>
+    </ul>
+    <button mat-stroked-button class="account">Личный кабинет</button>
   </div>
 </div>
