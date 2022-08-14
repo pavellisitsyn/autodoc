@@ -10,10 +10,19 @@ const routes: Routes = [
     component: ContentComponent,
     children: [
       { path: '', redirectTo: '/news', pathMatch: 'full' },
-      { path: 'news', component: NewsListComponent },
+      {
+        path: 'news',
+        component: NewsListComponent,
+        data: {
+          title: 'Новости'
+        }
+      },
       {
         path: 'news/item/:url',
         component: NewsDetailComponent,
+        data: {
+          title: 'Просмотреть новость'
+        }
       },
     ]
   }
