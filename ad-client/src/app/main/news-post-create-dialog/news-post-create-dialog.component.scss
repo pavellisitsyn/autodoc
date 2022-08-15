@@ -1,11 +1,19 @@
 .create-form {
+  min-width: 400px;
   width: 33vw;
 
   mat-form-field {
+    min-width: 350px;
     width: 30vw;
   }
 
   .file-input {
     margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 925px) {
+  .create-form {
+    font-size: 12px;
   }
 }
