@@ -44,7 +44,7 @@ export class NewsListComponent implements OnInit, OnDestroy {
     if (this.userNews) {
       const userNews = JSON.parse(localStorage.getItem('userNews'))
       userNews.forEach(element => {
-        this.news = [element, ...this.news]
+        this.news = [element, ...this.news];
       });
     }
     // Scroll and trigger uploading new scope of news
@@ -79,11 +79,8 @@ export class NewsListComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(NewsPostCreateDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       res => {
-        res.data.forEach(element => {
-          this.news = [element, ...this.news];
-          // Detect changes in news list
-          this.cdr.markForCheck();
-        });
+        this.news = [res.data, ...this.news];
+        this.cdr.markForCheck();
       }
     );
   }

@@ -78,7 +78,7 @@ export class NewsPostCreateDialogComponent implements OnInit {
     localStorage.setItem('userNews', JSON.stringify(this.userNews))
     // Reset form and close the dialog
     this.createNewsPostForm.reset()
-    this.dialogRef.close({ data: this.userNews })
+    this.dialogRef.close({ data: newsPost })
   }
 
 }
